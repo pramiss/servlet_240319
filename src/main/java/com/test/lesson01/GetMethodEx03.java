@@ -15,6 +15,8 @@ public class GetMethodEx03 extends HttpServlet {
 	public void doGet( // doGet: Get 요청으로 받겠다.
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		// Test용 주석 추가
+		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/json");
 		
