@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/lesson01/quiz09")
 public class PostMethodQuiz09 extends HttpServlet{
 
+	// stash 테스트용 주석 추가
+	
 	@Override
 	public void doPost(HttpServletRequest request
 			, HttpServletResponse response) throws IOException {
@@ -32,16 +34,6 @@ public class PostMethodQuiz09 extends HttpServlet{
 		out.print("</body></html>");
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
