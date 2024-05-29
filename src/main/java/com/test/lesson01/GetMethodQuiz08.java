@@ -36,15 +36,23 @@ public class GetMethodQuiz08 extends HttpServlet {
 		
 		// 탐색 출력
 		PrintWriter out = response.getWriter();
-		Iterator<String> iter = list.iterator();
-		
 		out.print("<html><head><title>검색 결과</title></head><body>");
 		
+		Iterator<String> iter = list.iterator();
 		while (iter.hasNext()) {
 			String line = iter.next(); // iter.next()는 1반복에 1번만 하기 ->그래서 iter.next()는 변수에 저장하는게 좋음
 			if (line.contains(keyword)) {
-				String newLine = line.replace(keyword, "<b>" + keyword + "</b>");
-				out.print(newLine + "<br>");
+				// 1. replace (권장)
+				line = line.replace(keyword, "<b>" + keyword + "</b>");
+				out.print(line + "<br>");
+				
+				// 2. split - 문자열(keyword)을 기준으로 자름
+//				String[] words = line.split(keyword);
+//				out.print(words[0] + "<b>" + keyword + "</b>" + words[1] + "<br>");
+				
+				// 3.indexOf
+				// indexOf로 keyword 위치를 찾고 앞뒤로 <b>와 </b>태그를 붙일 수도 있음
+				
 			}
 		}
 		out.print("</body></html>");
