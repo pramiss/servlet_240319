@@ -1,12 +1,10 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Quiz02_1</title>
+	<title>Insert title here</title>
 	
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -14,23 +12,38 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 <body>
-	<%	// Scriptlet
+	<%
 		// request params
-		String type = request.getParameter("type");
-
-		// 시간 or 날짜 출력
-		SimpleDateFormat sdf = null;
-		if (type.equals("time")) { // 시간
-			sdf = new SimpleDateFormat("현재 시간은 HH시 mm분 ss초 입니다.");			
-		} else { // 날짜			
-			sdf = new SimpleDateFormat("현재 날짜는 yyyy년 MM월 dd일 입니다.");
+		int cm = Integer.valueOf(request.getParameter("cm"));
+		String[] unitArr = request.getParameterValues("unit");
+		
+		// 길이 변환
+		String result = "";
+		if (unitArr != null) {
+			for (String unit : unitArr) {
+				if (unit.equals("inch")) {
+					result += "<h2>" + (cm * 0.393701) + "in</h2>";
+				} else if (unit.equals("yard")) {
+					result += "<h2>" + (cm * 0.010936) + "yd</h2>";
+				} else if (unit.equals("feet")) {
+					result += "<h2>" + (cm * 0.032808) + "ft</h2>";
+				} else if (unit.equals("meter")) {
+					result += "<h2>" + (cm * 0.01) + "m</h2>";
+				}
+			}
 		}
-		String result = sdf.format(new Date());
+		
 	%>
 	
 	<div class="container">
-		<div class="display-4"><%= result %></div>
+		<h1>길이 변환 결과</h1>
+		<h2><%= cm %> cm</h2>
+		<hr>
+		<h1><%= result %> </h1>
 	</div>
+	
+	
+	
 	
 </body>
 </html>

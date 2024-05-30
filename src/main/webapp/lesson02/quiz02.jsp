@@ -13,13 +13,14 @@
 </head>
 <body>
 	<div class="container">
-		<h1 class="mb-4">날짜, 시간 링크</h1>
-		<a href="/lesson02/quiz02_1.jsp?check=time" class="btn btn-primary">
+		<h1 class="mb-5">날짜, 시간 링크</h1>
+		<a href="/lesson02/quiz02_1.jsp?type=time" class="btn btn-primary">
 			현재 시간 확인
 		</a>
-		<a href="/lesson02/quiz02_1.jsp?check=date" class="btn btn-success">
+		<a href="/lesson02/quiz02_1.jsp?type=date" class="btn btn-success">
 			현재 날짜 확인
 		</a>
+		<!-- 마우스를 올리면 왼쪽 아래 주소가 뜨는 건 a 태그만, button은 안됨 -->
 	</div>
 </body>
 </html>
