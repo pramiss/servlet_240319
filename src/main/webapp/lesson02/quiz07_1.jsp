@@ -14,10 +14,6 @@
 </head>
 <body>
 	<%
-		// request params
-		String keyword = request.getParameter("keyword"); // "keyword" or ""
-		String pointFilter = request.getParameter("pointFilter"); // "true" or null
-		
 		// data
 		List<Map<String, Object>> list = new ArrayList<>();
 	    Map<String, Object> map = new HashMap<String, Object>() {{ put("name", "버거킹"); put("menu", "햄버거"); put("point", 4.3); } };
@@ -48,19 +44,28 @@
 			</thead>
 			<tbody>
 				<%
+					// request params
+					String keyword = request.getParameter("keyword"); // "keyword" or ""
+					String pointFilter = request.getParameter("pointFilter"); // "true" or null
+					boolean exclude = pointFilter != null; // 체크됨 => true 4점 이하 제외
+
 					for (Map<String, Object> item : list) {
 						String menu = String.valueOf(item.get("menu"));
 						String name = String.valueOf(item.get("name"));
 						double point = (double)item.get("point");
-						
-						if ((keyword.equals("") || menu.equals(keyword)) 
-								&& ((pointFilter == null || point >= 4.0))) {
+
+						// keyword 체크
+						if ((keyword.equals("") || menu.equals(keyword))) {
+							// skip 조건이 체크됨. 스킵 되어야할 때 skip(continue)
+							if (exclude && point <= 4.0) {
+								continue; // 안뿌리고 skip
+							}
 				%>
-				<tr>
-					<td><%= menu %></td>
-					<td><%= name %></td>
-					<td><%= point %></td>
-				</tr>
+						<tr>
+							<td><%= menu %></td>
+							<td><%= name %></td>
+							<td><%= point %></td>
+						</tr>
 				<%
 						} // -- keyword, pointFilter 조건문
 					} // -- for
@@ -68,16 +73,5 @@
 			</tbody>
 		</table>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
