@@ -89,8 +89,8 @@ list.add(map);
 					String category = request.getParameter("category");
 				
 					for (Map<String, String> ch : list) {
-						if (category == null
-								|| ch.get("category").equals(category)) {
+						// 카테고리 null(전체) or 카테고리가 일치할때
+						if (category == null || ch.get("category").equals(category)) {
 				%>
 					<tr>
 						<td class="col-3"><%= ch.get("ch") %></td>
