@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 	<title>HONG당무 마켓</title>
 	
 	<!-- Bootstrap -->
@@ -19,11 +19,14 @@
 			--main-color: rgb(255, 127, 80);
 		}
 		
+		textarea {resize: none;}
 		a:hover {text-decoration: none;}
 		.a-center {display: flex; justify-content: center; align-items: center;}
 		.fs-22 {font-size: 18px;}
 		.bg-main {background: var(--main-color);}
 		.text-main {color: var(--main-color);}
+		.btn-eee {background: #eee; transition: all 0.5s;}
+		.btn-eee:hover {background: #888; color:white;}
 	
 		header { height: 100px;}
 		nav {height: 60px;}
@@ -33,50 +36,20 @@
 		.nav-link {color: #fff; transition: all 0.5s; }
 		.nav-link:hover {color: #343a40;}
 		
-		.seller-item-container {
-			display: flex;
-			flex-wrap: wrap;
-			padding: 10px 0;
-			gap: 0 2%;
-		}
-		.seller-item {
-			width: 32%;
-			border: var(--main-color) solid 2px;
-			padding: 10px;
-			margin: 10px 0;
-			transition: all 0.5s;
-		}
-		.seller-item:hover {
-			background: #fee;
-			cursor: pointer;
-		}
-		.seller-name {
-			color: var(--main-color);
-			font-weight: bold;
-		}
-		.seller-img {
-			width: 100%;
-			height: 240px;
-			object-fit: cover;
+		.upload-container {
+			width: 1000px;
+			margin: 0 auto;
 		}
 	</style>
 </head>
 <body>
 <%
-// db 연결
-MysqlService ms = MysqlService.getInstance();
-ms.connect();
+	MysqlService ms = MysqlService.getInstance();
+	ms.connect();
 	
-// select all from used_goods & seller?
-String query = "select s.id, s.nickname, u.title, u.`description`, u.price, u.pictureUrl"
-+ " from seller as s"
-+ " join used_goods as u"
-+ " on s.id = u.sellerId"
-+ " order by s.id DESC;";
-
-ResultSet res = ms.select(query);
+	String selectQuery = "select * from seller";
+	ResultSet res = ms.select(selectQuery);
 %>
-	
 	<div id="wrap" class="container">
 		<header class="a-center bg-main">
 			<h1><a href="/lesson03/quiz03_list.jsp" class="text-white">HONG당무 마켓</a></h1>
@@ -89,47 +62,41 @@ ResultSet res = ms.select(query);
 			</ul>
 		</nav>
 		<section class="contents">
-			<!-- 판매자 상품 목록 -->
-			<div class="seller-item-container">
-			<%
-				while(res.next()) {
-					String pictureUrl = "";
-					if (res.getString("pictureUrl") == null || res.getString("pictureUrl").equals("")) {
-						pictureUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTytbFLf-6q6MxiCpxh8oIIltg7j1eY7hSDtQ&s";
-					} else {
-						pictureUrl = res.getString("pictureUrl");
-					}
-			%>
-				<div class="seller-item">
-					<img src="<%= pictureUrl %>" class="seller-img">
-					<div class="font-weight-bold mt-1"><%= res.getString("title") %></div>
-					<small class="text-secondary "><%= res.getInt("price") %> 원</small>
-					<div class="seller-name"><%= res.getString("nickname") %></div>
-				</div>
-			<%
-				}
-			%>
+			<div class="upload-container">
+				<div class="display-4 py-5">물건 올리기</div>
+				<form method="post" action="/lesson03/quiz03_insert">
+					<div class="form-group d-flex justify-content-between">
+						<select name="id" class="form-control col-3">
+							<option>-아이디 선택-</option>
+							<% while (res.next()) { %>
+							<option value="<%= res.getInt("id") %>"><%= res.getString("nickname") %></option>
+							<% } %>
+						</select>
+						<input type="text" name="title" class="form-control col-5" placeholder="제목">
+						<div class="input-group col-3 p-0">
+						  <input type="text" name="price" class="form-control" placeholder="가격">
+						  <div class="input-group-append">
+						    <span class="input-group-text">원</span>
+						  </div>
+						</div>
+					</div>
+					<textarea name="description" class="form-control" rows="10" placeholder="내용을 입력해 주세요."></textarea>
+					<div class="input-group mt-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text">이미지 url</span>
+					  </div>
+					  <input type="text" name="pictureUrl" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-eee w-100 mt-3">저장</button>
+				</form>
 			</div>
 		</section>
 		<footer class="a-center">
 			<small class="text-secondary">Copyright 2024 © HONG All Rights Reserved.</small>
 		</footer>
 	</div>
-	
 <%
-//db 연결해제
 ms.disconnect();
 %>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
