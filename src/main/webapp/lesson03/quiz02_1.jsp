@@ -16,7 +16,7 @@
 	<div class="container">
 		<h1>즐겨찾기 추가</h1>
 		
-		<form method="get" action="/lesson03/InsertQuiz02">
+		<form method="post" action="/lesson03/InsertQuiz02">
 			<label for="name" class="mt-2">사이트명:</label>
 			<input type="text" name="name" id="name" class="form-control col-4">
 			

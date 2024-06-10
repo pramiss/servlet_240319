@@ -14,16 +14,15 @@ import com.test.common.MysqlService;
 public class DeleteQuiz02 extends HttpServlet {
 
 	@Override
-	public void doGet(HttpServletRequest request
-			, HttpServletResponse response) throws IOException {
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
 		// request params
 		int id = Integer.valueOf(request.getParameter("id"));
-		
+
 		// db 연결
 		MysqlService ms = MysqlService.getInstance();
 		ms.connect();
-		
+
 		// delete 쿼리 수행
 		String query = "delete from `bookmark` where `id` = " + id;
 		try {
@@ -31,10 +30,10 @@ public class DeleteQuiz02 extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		// db 연결해제
 		ms.disconnect();
-		
+
 		// response redirect
 		response.sendRedirect("/lesson03/quiz02.jsp");
 	}

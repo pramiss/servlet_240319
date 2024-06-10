@@ -14,7 +14,7 @@ import com.test.common.MysqlService;
 public class InsertQuiz02 extends HttpServlet {
 
 	@Override
-	public void doGet(HttpServletRequest request
+	public void doPost(HttpServletRequest request
 			, HttpServletResponse response) throws IOException {
 		
 		// request params
