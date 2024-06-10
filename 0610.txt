@@ -23,9 +23,12 @@ POST : Request Body 구성
 => 최종적으로 sts~.release 폴더만 있으면됨
 
 
+2. SpringToolSuite4로 실행 및 workspace 잡기
+
 
 6. 플러그인 설치 및 인코딩
-Helop > Eclipse Marketplace
+1) 플로그인 설치
+Help > Eclipse Marketplace
 'Java and web' 검색
 마지막에 jsp로 끝나는지 확인(json으로 끝나면 안됨)
 > Install
@@ -33,7 +36,7 @@ Helop > Eclipse Marketplace
 뜨는 창에서 PGP 두개 선택하고 trust select
 > 'restart now'
 
-그리고 인코딩 4개하면 됨
+2) 인코딩 4개하면 됨
 
 
 
@@ -85,7 +88,8 @@ com.example.foo.TestController.java <= 인식O
 5. Boot Dashboard (이전의 Servers 역할)
 (잃어버리면 Window -> show view -> others 에서 검색)
 
-만약 어느날 갑자기 서버가 안 켜지면?
+
+7. !!! 만약 어느날 갑자기 서버가 안 켜지면?
 -> 마론달 제일 아래 '에러 잡기' 수행했어야함
 
 Dashboard에서 서버 켜고 http://localhost:8080/test1로 접속
