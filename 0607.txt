@@ -1,4 +1,0 @@
-302 redirect
-200 ok
-
-개발자도구 NETWORK 탭에서 확인가능
